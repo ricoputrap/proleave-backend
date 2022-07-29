@@ -1,5 +1,5 @@
 import { Express, Request, Response } from "express";
-import { STATUS_CODES } from "./utils/app-errors";
+import { STATUS_CODES } from "./types";
 
 const expressApp = (app: Express) => {
 
