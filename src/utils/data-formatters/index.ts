@@ -11,8 +11,12 @@ const populateForeignKeysData = (
 
     if (!!value) {
       responseItem.relationships[field] = {
-        data: { id: value, type },
-        url: `${endpoint}/${value}`
+        data: { 
+          id: value.id,
+          name: value.surename,
+          type
+        },
+        url: `${endpoint}/${value.id}`
       };
     }
   });

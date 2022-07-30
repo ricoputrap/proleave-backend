@@ -15,10 +15,12 @@ class DepartmentService {
   public async getAllDepartments(): Promise<any> {
     try {
       const { USERS, DEPARTMENTS } = DATA_TYPES;
-      const departments: Department[] = await this.repository.getAllDepartments();
+      const departments: Department[] = await this.repository.getAllDepartments({
+        is_archived: false
+      });
       const foreignKeys: ForeignKey[] = [
-        { field: "pic_id", type: USERS, endpoint: USER_URL },
-        { field: "supervisor_id", type: USERS, endpoint: USER_URL }
+        { field: "pic", type: USERS, endpoint: USER_URL },
+        { field: "supervisor", type: USERS, endpoint: USER_URL }
       ];
 
       return formatResponseMultiple(departments, DEPARTMENTS, foreignKeys);
