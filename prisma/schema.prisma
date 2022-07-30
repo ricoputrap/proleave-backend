@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int           @id @default(autoincrement())
+  employee_id     String        @unique
+  email           String        @unique
+  password        String        @db.VarChar(255)
+  fullname        String        @db.VarChar(255)
+  surename        String        @db.VarChar(20)
+  role            Role          @default(EMPLY)
+  department      Department?   @relation("DepartmentMembers", fields: [department_id], references: [id])
+  department_id   Int?
+  pic_dept        Department[]  @relation("DepartmentPIC")
+  supervisor_dept Department[]  @relation("DepartmentSupervisor")
+  is_active       Boolean       @default(false)
+  is_archived     Boolean       @default(false)
+  created_at      DateTime      @default(now())
+  updated_at      DateTime?     @updatedAt
+}
+
+enum Role {
+  EMPLY   // EMPLOYEE
+  HRMBR   // HR MEMBER
+  HRDIR   // HR DIRECTOR
+  SPVSR   // SUPERVISOR
+  SPADM   // SUPER ADMIN
+}
+
+model Department {
+  id              Int         @id @default(autoincrement())
+  name            String      @db.VarChar(255)
+  description     String      @db.VarChar(255)
+  members         User[]      @relation("DepartmentMembers")
+  pic             User?       @relation("DepartmentPIC", fields: [pic_id], references: [id])
+  pic_id          Int?
+  supervisor      User?       @relation("DepartmentSupervisor", fields: [supervisor_id], references: [id])
+  supervisor_id   Int?
+  is_archived     Boolean     @default(false)
+  created_at      DateTime    @default(now())
+  updated_at      DateTime?   @updatedAt
+}
