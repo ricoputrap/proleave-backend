@@ -1,4 +1,4 @@
-enum STATUS_CODES {
+export enum STATUS_CODES {
   OK = 200,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 403,
@@ -6,4 +6,7 @@ enum STATUS_CODES {
   INTERNAL_SERVER = 500
 }
 
-export { STATUS_CODES }
+export enum DATA_TYPES {
+  USERS = "users",
+  DEPARTMENTS = "departments",
+}

@@ -1,4 +1,4 @@
-import AppError from ".";
+import AppError from "./AppError";
 import { STATUS_CODES } from "../../types";
 
 class ValidationError extends AppError {
