@@ -34,6 +34,16 @@ const formatResponsePerItem = (
     relationships: {}
   }; 
 
+  if (item.attributes._count) {
+    const counts = Object.entries(item.attributes._count);
+    counts.map(([label, value]) => {
+      const totalLabel = `total_${label}`;
+      item.attributes[totalLabel] = value;
+    });
+
+    delete item.attributes._count;
+  }
+
   populateForeignKeysData(item, data, foreignKeys);
 
   return item;

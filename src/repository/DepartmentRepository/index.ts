@@ -10,7 +10,13 @@ class DepartmentRepository {
     try {
       const allDepartments: Department[] = await this.dbClient.department.findMany({
         where: whereClauses,
-        include: {
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          is_archived: true,
+
+          // foreign keys
           pic: { 
             select: {
               id: true,
@@ -22,6 +28,13 @@ class DepartmentRepository {
               id: true,
               surename: true
             } 
+          },
+
+          // counts
+          _count: {
+            select: {
+              members: true
+            }
           }
         }
       })
