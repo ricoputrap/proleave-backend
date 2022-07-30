@@ -6,14 +6,14 @@ const populateForeignKeysData = (
   data: any,
   foreignKeys: ForeignKey[],
 ): void => {
-  foreignKeys.forEach(({ field, type, endpoint }) => {
-    const value = data[field];
+  foreignKeys.forEach(({ key, fields, type, endpoint }) => {
+    const value = data[key];
 
     if (!!value) {
-      responseItem.relationships[field] = {
+      responseItem.relationships[key] = {
         data: { 
-          id: value.id,
-          name: value.surename,
+          id: value[fields.id],
+          name: value[fields.name],
           type
         },
         url: `${endpoint}/${value.id}`

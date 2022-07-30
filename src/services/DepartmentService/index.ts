@@ -19,8 +19,24 @@ class DepartmentService {
         is_archived: false
       });
       const foreignKeys: ForeignKey[] = [
-        { field: "pic", type: USERS, endpoint: USER_URL },
-        { field: "supervisor", type: USERS, endpoint: USER_URL }
+        { 
+          key: "pic",
+          fields: {
+            id: "id",
+            name: "surename"
+          },
+          type: USERS,
+          endpoint: USER_URL
+        },
+        { 
+          key: "supervisor",
+          fields: {
+            id: "id",
+            name: "surename"
+          },
+          type: USERS,
+          endpoint: USER_URL
+        }
       ];
 
       return formatResponseMultiple(departments, DEPARTMENTS, foreignKeys);

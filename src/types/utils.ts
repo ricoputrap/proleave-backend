@@ -1,5 +1,6 @@
 export interface ForeignKey {
-  field: string;
+  key: string;
+  fields: any;
   type: string;
   endpoint: string;
 }
